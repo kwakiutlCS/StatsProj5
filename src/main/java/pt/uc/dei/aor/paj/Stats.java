@@ -34,7 +34,6 @@ public class Stats implements MessageListener {
 		TextMessage tmsg = (TextMessage) msg;
 		try {
 			String xml = tmsg.getText();
-			//System.out.println(xml);
 			Pattern p = Pattern.compile("<date>(\\d{4})\\-(\\d{1,2})\\-(\\d{1,2})T(\\d{1,2}):(\\d{1,2}):(\\d{1,2})\\d{1,2}\\.\\d{1,3}Z</date>");
 			Matcher m = p.matcher(xml);
 			
@@ -68,8 +67,6 @@ public class Stats implements MessageListener {
 			jcontext.setClientID("parvo");
 			JMSConsumer consumer = jcontext.createDurableConsumer(topic, "parvo");
 			consumer.setMessageListener(this);
-//			System.out.println("Press enter to finish...");
-//			System.in.read();
 			Thread.sleep(5000);
 		} catch (JMSRuntimeException | InterruptedException re) {
 			re.printStackTrace();
