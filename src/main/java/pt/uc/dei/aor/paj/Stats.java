@@ -38,6 +38,7 @@ public class Stats implements MessageListener {
 			Pattern p = Pattern.compile("<date>(\\d{4})\\-(\\d{1,2})\\-(\\d{1,2})T(\\d{1,2}):(\\d{1,2}):(\\d{1,2})\\d{1,2}\\.\\d{1,3}Z</date>");
 			Matcher m = p.matcher(xml);
 			
+			int counter = 0;
 			while (m.find()) {
 				System.out.println(m.group());
 				int year = Integer.parseInt(m.group(1));
@@ -52,7 +53,9 @@ public class Stats implements MessageListener {
 				System.out.println(c.getTime());
 				System.out.println(nowMinus12h.getTime());
 				System.out.println(c.after(nowMinus12h));
+				if (c.after(nowMinus12h)) counter++;
 			}
+			System.out.println(counter);
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,10 +68,10 @@ public class Stats implements MessageListener {
 			jcontext.setClientID("parvo");
 			JMSConsumer consumer = jcontext.createDurableConsumer(topic, "parvo");
 			consumer.setMessageListener(this);
-			System.out.println("Press enter to finish...");
-			System.in.read();
-
-		} catch (JMSRuntimeException | IOException re) {
+//			System.out.println("Press enter to finish...");
+//			System.in.read();
+			Thread.sleep(5000);
+		} catch (JMSRuntimeException | InterruptedException re) {
 			re.printStackTrace();
 		}
 	}
