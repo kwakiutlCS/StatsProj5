@@ -1,4 +1,4 @@
-package pt.uc.dei.aor.paj;
+package pt.uc.dei.aor.paj.stats;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
 import javax.jms.JMSConsumer;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
@@ -67,7 +66,7 @@ public class Stats implements MessageListener {
 		
 		try {
 			String xml = tmsg.getText();
-			Pattern p = Pattern.compile("<date>(\\d{4})\\-(\\d{1,2})\\-(\\d{1,2})T(\\d{1,2}):(\\d{1,2}):(\\d{1,2})\\d{1,2}\\.\\d{1,3}Z</date>");
+			Pattern p = Pattern.compile("<date>(\\d{4})\\-(\\d{1,2})\\-(\\d{1,2})T(\\d{1,2}):(\\d{1,2}):\\d{1,2}\\.\\d{1,3}Z</date>");
 			Matcher m = p.matcher(xml);
 			
 			int counter = 0;

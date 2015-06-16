@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<xs:element name="jornalType">
+
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element type="categoriaType" name="categoria"
+					maxOccurs="7" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:complexType name="noticiaType">
+		<xs:sequence>
+			<xs:element type="xs:anyURI" name="url" />
+			<xs:element type="xs:string" name="titulo" />
+			<xs:element type="xs:string" name="highlights" maxOccurs="unbounded"
+				minOccurs="0" />
+			<xs:element type="xs:dateTime" name="date" />
+			<xs:element type="xs:string" name="author" />
+			<xs:element type="xs:string" name="newstext" />
+			<xs:element type="imageType" name="image" maxOccurs="unbounded"
+				minOccurs="0" />
+			<xs:element type="videoType" name="videoURLS" maxOccurs="unbounded"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="categoriaType">
+		<xs:sequence>
+			<xs:element type="noticiaType" name="noticia" maxOccurs="unbounded"
+				minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute type="categoria_tipo" name="tipo" />
+	</xs:complexType>
+
+	<xs:simpleType name="categoria_tipo">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="europe" />
+			<xs:enumeration value="us" />
+			<xs:enumeration value="asia" />
+			<xs:enumeration value="africa" />
+			<xs:enumeration value="china" />
+			<xs:enumeration value="americas" />
+			<xs:enumeration value="middleeast" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="imageType">
+		<xs:sequence>
+			<xs:element type="xs:anyURI" name="url" />
+			<xs:element type="xs:string" name="caption" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="videoType">
+		<xs:sequence>
+			<xs:element type="xs:anyURI" name="url" />
+			<xs:element type="xs:string" name="caption" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
