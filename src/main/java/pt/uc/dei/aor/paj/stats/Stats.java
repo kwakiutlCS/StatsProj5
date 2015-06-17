@@ -36,12 +36,16 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 
+
 public class Stats implements MessageListener {
+	private static final Logger logger = LogManager.getLogger(Stats.class);
 	private ConnectionFactory cf;
 	private Topic topic;
 
@@ -57,10 +61,10 @@ public class Stats implements MessageListener {
 			createXML(tmsg.getText());
 			validateXml();
 		} catch (SAXException | IOException e1) {
-			// TODO Logger validation
+			logger.error("XML inválido. "+e1.getMessage());
 			return;
 		} catch (Exception e) {
-			// TODO Logger generate file
+			logger.error("Não é possível criar ficheiro XML.");
 			return;
 		}
 		
