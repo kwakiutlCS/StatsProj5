@@ -72,7 +72,6 @@ public class Stats implements MessageListener {
 			
 			int counter = 0;
 			while (m.find()) {
-				System.out.println(m.group());
 				int year = Integer.parseInt(m.group(1));
 				int month = (Integer.parseInt(m.group(2))-1)%12;
 				int day = Integer.parseInt(m.group(3));
@@ -82,12 +81,17 @@ public class Stats implements MessageListener {
 				c.setTimeZone(TimeZone.getTimeZone("GMT"));
 				Calendar nowMinus12h = new GregorianCalendar();
 				nowMinus12h.add(Calendar.HOUR_OF_DAY, -12);
-				System.out.println(c.getTime());
-				System.out.println(nowMinus12h.getTime());
-				System.out.println(c.after(nowMinus12h));
 				if (c.after(nowMinus12h)) counter++;
 			}
-			writeFIleStats("Número de noticias nas ultimas 12 horas: " +counter+" noticias.");
+			
+			int counterTotal = 0;
+			p = Pattern.compile("<noticia>");
+			m = p.matcher(xml);
+			while (m.find()) {
+				counterTotal++;
+			}
+			writeFIleStats("Número total de notícias: " +counterTotal+" notícias.\n"
+					+ "Número de notícias nas últimas 12 horas: " +counter+" notícias.");
 		} catch (JMSException e) {
 			logger.error("Erro de acesso JMS");
 		} catch (IOException e) {

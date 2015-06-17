@@ -1,1 +1,2 @@
-Número de noticias nas ultimas 12 horas: 12 noticias.
+Número total de notícias: 21 notícias.
+Número de notícias nas últimas 12 horas: 11 notícias.

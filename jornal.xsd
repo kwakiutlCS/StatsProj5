@@ -19,12 +19,12 @@
 			<xs:element type="xs:string" name="highlights" maxOccurs="unbounded"
 				minOccurs="0" />
 			<xs:element type="xs:dateTime" name="date" />
-			<xs:element type="xs:string" name="author" />
+			<xs:element type="xs:string" name="author" minOccurs="0" />
 			<xs:element type="xs:string" name="newstext" />
 			<xs:element type="imageType" name="image" maxOccurs="unbounded"
 				minOccurs="0" />
 			<xs:element type="videoType" name="videoURLS" maxOccurs="unbounded"
-				minOccurs="3" />
+				minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 
