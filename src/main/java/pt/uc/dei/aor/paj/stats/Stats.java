@@ -70,7 +70,7 @@ public class Stats implements MessageListener {
 		
 		try {
 			String xml = tmsg.getText();
-			Pattern p = Pattern.compile("<date>(\\d{4})\\-(\\d{1,2})\\-(\\d{1,2})T(\\d{1,2}):(\\d{1,2}):\\d{1,2}\\.\\d{1,3}Z</date>");
+			Pattern p = Pattern.compile("<date>(\\d{4})\\-(\\d{1,2})\\-(\\d{1,2})T(\\d{1,2}):(\\d{1,2}):\\d{1,2}Z</date>");
 			Matcher m = p.matcher(xml);
 			
 			int counter = 0;

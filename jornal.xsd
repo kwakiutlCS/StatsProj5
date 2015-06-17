@@ -24,7 +24,7 @@
 			<xs:element type="imageType" name="image" maxOccurs="unbounded"
 				minOccurs="0" />
 			<xs:element type="videoType" name="videoURLS" maxOccurs="unbounded"
-				minOccurs="0" />
+				minOccurs="3" />
 		</xs:sequence>
 	</xs:complexType>
 
