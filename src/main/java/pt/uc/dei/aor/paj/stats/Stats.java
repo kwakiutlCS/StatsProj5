@@ -24,10 +24,7 @@ import javax.naming.NamingException;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -92,11 +89,9 @@ public class Stats implements MessageListener {
 			}
 			writeFIleStats("Número de noticias nas ultimas 12 horas: " +counter+" noticias.");
 		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erro de acesso JMS");
 		} catch (IOException e) {
-			// TODO Logger função writeFileStats escreve ou não
-			e.printStackTrace();
+			logger.error("Não é possível criar ficheiro XML.");
 		}
 		
 	}
@@ -123,12 +118,12 @@ public class Stats implements MessageListener {
 
 	public void launch_and_wait() {
 		try (JMSContext jcontext = cf.createContext("mr", "mr2015");) {
-			jcontext.setClientID("parvo");
-			JMSConsumer consumer = jcontext.createDurableConsumer(topic, "parvo");
+			jcontext.setClientID("statsId");
+			JMSConsumer consumer = jcontext.createDurableConsumer(topic, "statsId");
 			consumer.setMessageListener(this);
 			Thread.sleep(5000);
 		} catch (JMSRuntimeException | InterruptedException re) {
-			re.printStackTrace();
+			logger.error("Erro acesso JMS");
 		}
 	}
 	
